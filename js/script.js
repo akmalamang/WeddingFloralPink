@@ -176,6 +176,34 @@ function copyAccount(btn) {
     });
 }
 
+// =============================================
+// PARALLAX — Section 4 church background
+// =============================================
+
+function initParallax() {
+  const church = document.querySelector('.save-date .church');
+  if (!church) return;
+
+  // Hitung posisi section
+  const section = church.closest('.save-date');
+
+  window.addEventListener(
+    'scroll',
+    () => {
+      const rect = section.getBoundingClientRect();
+      const inView = rect.bottom > 0 && rect.top < window.innerHeight;
+      if (!inView) return;
+
+      // Seberapa jauh section sudah discroll (0 = atas viewport, 1 = bawah)
+      const progress = -rect.top / (rect.height + window.innerHeight);
+      // Geser background -10% sampai +10%
+      const offset = progress * 80; // px
+      church.style.transform = `translateY(${offset}px)`;
+    },
+    { passive: true },
+  );
+}
+
 // Tampilkan toast "Nomor disalin!"
 function showGiftToast() {
   const toast = document.getElementById('giftToast');
@@ -193,6 +221,7 @@ const RSVP_KEY = 'wedding_rsvp_adit_chintya';
 document.addEventListener('DOMContentLoaded', () => {
   renderRSVPList();
   updateRSVPCounters();
+  initParallax();
 });
 
 // Submit form

@@ -678,6 +678,7 @@ body {
   }
   .s2-flower-top {
     width: 30px;
+    top: 15%;
   }
   .s2-gold-bl {
     width: 88px;
@@ -882,7 +883,7 @@ body {
 }
 
 /* =============================================
-   SECTION 4 — Save the date waktu Mulai acara 
+   SECTION 4 — Save the date
    ============================================= */
 
 .save-date {
@@ -896,24 +897,34 @@ body {
   padding-bottom: 0;
 }
 
+/* ── Background gedung — parallax layer ── */
 .church {
   position: absolute;
-  top: 0;
+  top: -10%;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 120%; /* lebih tinggi supaya parallax punya ruang gerak */
   object-fit: cover;
   object-position: center top;
   z-index: 0;
+  opacity: 0;
+  will-change: transform; /* hint GPU untuk parallax */
+  animation: fadeInBg 1.4s ease 0.2s forwards;
 }
 
+/* ── Bunga atas — slide down + fade ── */
 .flower-top {
   width: clamp(220px, 60%, 360px);
   margin-top: 20px;
   position: relative;
-  z-index: 1;
+  z-index: 2;
+  opacity: 0;
+  transform: translateY(-28px);
+  animation: fadeDown 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s forwards;
+  will-change: transform;
 }
 
+/* ── Frame foto — scale in + fade ── */
 .frame {
   position: relative;
   width: clamp(160px, 40vw, 220px);
@@ -922,11 +933,35 @@ body {
   overflow: hidden;
   display: flex;
   justify-content: center;
-  z-index: 1;
   align-items: center;
+  z-index: 2;
   margin-top: -10px;
+
   opacity: 0;
-  animation: fadeIn 1s ease 0.1s forwards;
+  transform: scale(0.88) translateY(16px);
+  animation: frameIn 1s cubic-bezier(0.34, 1.56, 0.64, 1) 0.55s forwards;
+  will-change: transform;
+
+  /* Subtle float setelah muncul */
+  animation: frameIn 1s cubic-bezier(0.34, 1.56, 0.64, 1) 0.55s forwards;
+}
+
+@keyframes frameIn {
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Float naik-turun halus untuk frame foto */
+@keyframes floatFrame {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
 }
 
 .frame img {
@@ -935,22 +970,27 @@ body {
   object-fit: cover;
 }
 
+/* ── Judul "Save The Date" — fade up ── */
 .save-date h2 {
   margin-top: 25px;
   font-family: 'Great Vibes', cursive;
   font-size: clamp(36px, 8vw, 60px);
   color: #f09797;
   position: relative;
-  z-index: 1;
+  z-index: 2;
+
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.85s ease 0.9s forwards;
 }
 
+/* ── Countdown boxes — stagger fade up ── */
 .countdown {
   margin-top: 30px;
   display: flex;
   gap: clamp(10px, 3vw, 20px);
   position: relative;
-  z-index: 1;
-  /* HAPUS margin-bottom besar — biar flower-bottom atur sendiri */
+  z-index: 2;
 }
 
 .box {
@@ -964,8 +1004,50 @@ body {
   align-items: center;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
   color: white;
+
   opacity: 0;
-  animation: fadeIn 1s ease 0.1s forwards;
+  transform: translateY(24px) scale(0.9);
+  /* delay bertingkat via nth-child */
+  animation: boxIn 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  will-change: transform;
+}
+
+/* Stagger tiap box */
+.box:nth-child(1) {
+  animation-delay: 1s;
+}
+.box:nth-child(2) {
+  animation-delay: 1.15s;
+}
+.box:nth-child(3) {
+  animation-delay: 1.3s;
+}
+.box:nth-child(4) {
+  animation-delay: 1.45s;
+}
+
+@keyframes boxIn {
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Pulse halus pada box setiap detik (sync dengan detik countdown) */
+.box:last-child {
+  animation:
+    boxIn 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 1.45s forwards,
+    boxPulse 1s ease-in-out 2.2s infinite;
+}
+
+@keyframes boxPulse {
+  0%,
+  100% {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+  50% {
+    box-shadow: 0 10px 28px rgba(245, 150, 150, 0.45);
+  }
 }
 
 .box span {
@@ -979,19 +1061,23 @@ body {
   margin-top: 2px;
 }
 
-/* Spacer supaya flower-bottom tidak nutup countdown */
+/* ── Spacer ── */
 .save-date .spacer {
   height: clamp(10px, 1vw, 20px);
 }
 
+/* ── Bunga bawah — slide up + fade ── */
 .flower-bottom {
-  position: relative; /* <-- UBAH dari absolute ke relative */
+  position: relative;
   display: block;
-  margin-top: auto;
-  object-fit: cover;
   width: 100%;
+  object-fit: cover;
+  margin-top: auto;
+
   opacity: 0;
-  animation: fadeIn 1s ease 0.1s forwards;
+  transform: translateY(30px);
+  animation: fadeUp 1s ease 1.5s forwards;
+  will-change: transform;
 }
 
 /* =============================================
