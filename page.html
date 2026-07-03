@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Wedding of Adit & Chintya</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@300;400&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <!-- ======================================================
+       HALAMAN UNDANGAN UTAMA
+       Semua section ada di sini — user scroll ke bawah
+       ====================================================== -->
+    <main class="invitation">
+      <!-- ============================================
+         SECTION 1 — SAVE THE DATE (desain 2.png)
+         ============================================ -->
+      <section class="section section--savedate">
+        <!-- Dekorasi atas: assets/dekor-atas.png -->
+        <img class="deco-top" src="./assets/img/vector-atas.png" alt="" />
+
+        <!-- Background gedung: assets/gedung-bg.png -->
+        <img class="savedate__arch-bg" src="./assets/img/gedung.png" alt="" />
+
+        <!-- Kupu-kupu: assets/kupu1.png s/d kupu4.png -->
+        <img class="butterfly butterfly--1" src="./assets/img/kupu-kupu-bottom.png" alt="" />
+        <img class="butterfly butterfly--2" src="./assets/img/kupu-kupu-bottom.png" alt="" />
+        <img class="butterfly butterfly--3" src="./assets/img/kupu-kupu-bottom.png" alt="" />
+        <img class="butterfly butterfly--4" src="./assets/img/kupu-kupu-bottom.png" alt="" />
+
+        <!-- Teks -->
+        <div class="savedate__content">
+          <p class="sd-label scroll-fade">The wedding of</p>
+          <h2 class="sd-groom scroll-fade">Bila</h2>
+          <h2 class="sd-bride scroll-fade">&amp; Adit</h2>
+          <p class="sd-date scroll-fade">08.08.2026</p>
+          <button class="btn-save scroll-fade" onclick="scrollToNext(this)">Save the date</button>
+        </div>
+
+        <!-- Dekorasi bawah: assets/dekor-bawah.png -->
+        <img class="deco-bottom" src="./assets/img/vector-bottom.png" alt="" />
+      </section>
+
+      <!-- ============================================
+     SECTION 2 — AYAT QS. AR-RUM 21
+     ============================================ -->
+      <section class="section section--s2">
+        <!-- Dekorasi bunga atas: assets/bunga-s2-atas.png -->
+        <img class="s2-deco-top" src="./assets/img/bunga-1-se2.png" alt="" />
+
+        <!-- Background gedung: assets/gedung-bg.png (pakai ulang) -->
+        <img class="s2-arch-bg" src="./assets/img/gedung-wedding.png" alt="" />
+
+        <!-- Ornamen bunga gold kanan atas: assets/gold-bunga-kanan.png -->
+        <img class="s2-gold-tr" src="./assets/img/bunga-gold.png" alt="" />
+
+        <!-- Ornamen bunga gold kiri bawah: assets/gold-bunga-kiri.png -->
+        <img class="s2-gold-bl" src="./assets/img/bunga-gold-bawah.png" alt="" />
+
+        <!-- Bunga pink kecil di dalam frame atas: assets/bunga-pink-s2.png -->
+        <img class="s2-flower-top" src="./assets/img/bunga-2-se2.png" alt="" />
+
+        <!-- Kupu kecil kanan bawah: assets/kupu1.png (pakai ulang) -->
+        <img class="s2-butterfly" src="./assets/img/kupu-kupu-bottom.png" alt="" />
+
+        <!-- Bunga pojok kiri bawah: assets/bunga-bl.png (pakai ulang) -->
+        <img class="s2-corner-bl" src="./assets/img/bunga-1-sec3.png" alt="" />
+
+        <!-- Bunga pojok kanan bawah: assets/bunga-br.png (pakai ulang) -->
+        <img class="s2-corner-br" src="./assets/img/bunga-1-sec3.png" alt="" />
+
+        <!-- Frame melengkung gold + konten ayat -->
+        <div class="s2-frame scroll-fade">
+          <blockquote class="s2-quote">
+            "Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang. Sungguh,
+            pada yang demikian itu benar-benar terdapat tanda-tanda (kebesaran Allah) bagi kaum yang berpikir."
+          </blockquote>
+          <p class="s2-source">( QS. Ar-Rum Ayat 21 )</p>
+        </div>
+      </section>
+
+      <!-- ============================================
+     SECTION 3 — PROFIL MEMPELAI (4.png)
+     ============================================ -->
+      <section class="section section--s3">
+        <!-- Dekorasi bunga atas: assets/bunga-s2-atas.png (pakai ulang) -->
+        <img class="s3-deco-top" src="./assets/img/bunga-atas-sec4.png" alt="" />
+
+        <!-- Background gedung: assets/gedung-bg.png (pakai ulang) -->
+        <img class="s3-arch-bg" src="./assets/img/gedung.png" alt="" />
+
+        <!-- Kupu-kupu kiri bawah -->
+        <img class="s3-butterfly--1" src="./assets/img/kupu-kupu-2.png" alt="" />
+
+        <!-- Konten -->
+        <div class="s3-content">
+          <!-- Judul "Build & Room" (script) -->
+          <h2 class="s3-title scroll-fade">Build &amp; Room</h2>
+
+          <!-- Teks undangan -->
+          <p class="s3-desc scroll-fade">Tanpa mengurangi rasa hormat, perkenankan kami mengundang Bapak/Ibu/Saudara/i untuk berkenan hadir dan memberikan doa restu kepada kedua mempelai."</p>
+
+          <!-- Mempelai Pria -->
+          <div class="s3-couple-row s3-couple-row--groom scroll-fade">
+            <!-- Frame border dari asset Anda: assets/frame-pria.png -->
+            <div class="s3-photo-box s3-photo-box--left">
+              <img class="s3-frame" src="./assets/img/foto-sec3-cewe.png" alt="" />
+            </div>
+            <div class="se-pembungkus">
+              <h3 class="s3-name s3-name--right scroll-fade">Cintya Nabila S.Pd</h3>
+              <p class="">Putri ke-2 Dari Bapak Mastur Hadi (Bebeh) dan Ibu Aminah</p>
+            </div>
+          </div>
+
+          <!-- Simbol & -->
+          <p class="s3-ampersand scroll-fade">&amp;</p>
+
+          <!-- Mempelai Wanita -->
+          <div class="s3-couple-row s3-couple-row--bride scroll-fade">
+            <div class="se-pembungkus">
+              <h3 class="s3-name s3-name--left scroll-fade">Aditya Darmawan S.Pd</h3>
+              <p class="">Putra ke-2 dari Bapak Suheri (alm) dan Ibu Tursilawati (almh)</p>
+            </div>
+
+            <!-- Frame border dari asset Anda: assets/frame-wanita.png -->
+            <div class="s3-photo-box s3-photo-box--right">
+              <img class="s3-frame" src="./assets/img/foto-sec3-cowo.png" alt="" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================
+     SECTION 4 — Save the date waktu Mulai acara (4.png)
+     ============================================ -->
+      <section class="section save-date">
+        <img class="church" src="./assets/img/gedung.png" />
+        <img class="flower-top" src="./assets/img/bunga-sec-4.png" />
+
+        <div class="frame">
+          <img src="./assets/img/foto-sec-4-cople.png" />
+        </div>
+
+        <h2>Save The Date</h2>
+
+        <div class="countdown">
+          <div class="box">
+            <span id="days">00</span>
+            <small>Hari</small>
+          </div>
+          <div class="box">
+            <span id="hours">00</span>
+            <small>Jam</small>
+          </div>
+          <div class="box">
+            <span id="minutes">00</span>
+            <small>Menit</small>
+          </div>
+          <div class="box">
+            <span id="seconds">00</span>
+            <small>Detik</small>
+          </div>
+        </div>
+
+        <!-- spacer mendorong flower-bottom ke bawah -->
+        <div class="spacer"></div>
+
+        <img class="flower-bottom" src="assets/img/bunga-sec-4-bottom.png" />
+      </section>
+
+      <!-- ============================================
+     SECTION 5 — Akad Nikah (Detail Acara)
+     ============================================ -->
+      <section class="section akad-nikah">
+        <!-- Background gedung -->
+        <img class="akad-church" src="./assets/img/gedung.png" />
+
+        <!-- Dekorasi pojok -->
+        <img class="akad-flower-topleft" src="./assets/img/bunga-se-5-atas-kiri.png" />
+        <img class="akad-flower-topright" src="./assets/img/foto-bunga-gold-sec5-kanan.png" />
+        <img class="akad-flower-botleft" src="./assets/img/bunga-sec5-gold-kiri.png" />
+        <img class="akad-flower-botright" src="./assets/img/bunga-bawah-kanan-pink-sec-5.png" />
+
+        <!-- Card dengan arch/lengkungan emas -->
+        <div class="akad-card">
+          <!-- Border kiri kanan (diamond ornament) -->
+          <div class="akad-card-inner">
+            <h2 class="akad-title">Akad</h2>
+
+            <p class="akad-date">Sabtu, 08 Agustus 2026</p>
+            <p class="akad-time">Pukul 08.00 WIB</p>
+
+            <div class="akad-divider">
+              <span class="akad-line"></span>
+              <img class="akad-pin" src="./assets/img/maps.png" />
+              <span class="akad-line"></span>
+            </div>
+
+            <p class="akad-address">
+              Kp Jaha, Jl Rambutan, RT 05/RW 011, Kel. Jati Mekar,<br />
+              Kec Jatiasih, Bekasi<br />
+              <em>(Patokan galeri sanggar rias weni)</em>
+            </p>
+
+            <a class="akad-btn" href="https://maps.google.com/?q=Kp+Jaha+Jl+Rambutan+RT05+RW011+Jati+Mekar+Jatiasih+Bekasi" target="_blank" rel="noopener"> Lokasi Acara </a>
+          </div>
+        </div>
+
+        <!-- Bunga bawah -->
+        <img class="akad-flower-bottom" src="./assets/img/bunga-bawah-pink-sec-5.png" />
+      </section>
+
+      <!-- ============================================
+     SECTION 6 — Resepsi Nikah (Detail Acara)
+     ============================================ -->
+      <section class="section akad-nikah">
+        <!-- Background gedung -->
+        <img class="akad-church" src="./assets/img/gedung.png" />
+
+        <!-- Dekorasi pojok -->
+        <img class="akad-flower-topleft" src="./assets/img/bunga-se-5-atas-kiri.png" />
+        <img class="akad-flower-topright" src="./assets/img/foto-bunga-gold-sec5-kanan.png" />
+        <img class="akad-flower-botleft" src="./assets/img/bunga-sec5-gold-kiri.png" />
+        <img class="akad-flower-botright" src="./assets/img/bunga-bawah-kanan-pink-sec-5.png" />
+
+        <!-- Card dengan arch/lengkungan emas -->
+        <div class="akad-card">
+          <!-- Border kiri kanan (diamond ornament) -->
+          <div class="akad-card-inner">
+            <h2 class="akad-title">Resepsi</h2>
+
+            <p class="akad-date">Sabtu, 08 Agustus 2026</p>
+            <p class="akad-time">Pukul 10.00 WIB - Selesai</p>
+
+            <div class="akad-divider">
+              <span class="akad-line"></span>
+              <img class="akad-pin" src="./assets/img/maps.png" />
+              <span class="akad-line"></span>
+            </div>
+
+            <p class="akad-address">
+              Kp Jaha, Jl Rambutan, RT 05/RW 011, Kel. Jati Mekar,<br />
+              Kec Jatiasih, Bekasi<br />
+              <em>(Patokan galeri sanggar rias weni)</em>
+            </p>
+
+            <a class="akad-btn" href="https://maps.google.com/?q=Kp+Jaha+Jl+Rambutan+RT05+RW011+Jati+Mekar+Jatiasih+Bekasi" target="_blank" rel="noopener"> Lokasi Acara </a>
+          </div>
+        </div>
+
+        <!-- Bunga bawah -->
+        <img class="akad-flower-bottom" src="./assets/img/bunga-bawah-pink-sec-5.png" />
+      </section>
+
+      <!-- ============================================
+     SECTION 7 — Lovely Story
+     ============================================ -->
+      <section class="section lovely-story">
+        <img class="story-church" src="./assets/img/gedung.png" />
+
+        <!-- Bunga pojok — pakai class visible trigger dari JS -->
+        <img class="story-flower-topleft" src="./assets/img/sec-galeri/bunga-kiri-section-galeri.png" />
+        <img class="story-flower-topright" src="./assets/img/sec-galeri/bunga-kanan-section-galeri.png" />
+
+        <!-- Judul — scroll-fade -->
+        <h2 class="story-title scroll-fade">Lovely Story</h2>
+
+        <!-- Frame foto — scroll-fade dengan delay -->
+        <div class="story-frame-wrap scroll-fade" style="--delay: 0.15s">
+          <img class="story-frame" src="./assets/img/foto-galeri-.png" />
+        </div>
+
+        <!-- Timeline — tiap item scroll-fade dengan delay bertingkat -->
+        <div class="story-timeline">
+          <div class="story-item scroll-fade" style="--delay: 0s">
+            <h3 class="story-item-title">Awal Bertemu</h3>
+            <p class="story-item-desc">Kami dipertemukan sebagai mahasiswa di kampus yang sama. Awalnya, kami hanyalah dua orang yang saling mengenal tanpa ada cerita yang istimewa.</p>
+          </div>
+
+          <div class="story-item scroll-fade" style="--delay: 0.1s">
+            <h3 class="story-item-title">Pendekan</h3>
+            <span class="story-item-date">21 April 2023</span>
+            <p class="story-item-desc">Seiring berjalannya waktu, kami semakin mengenal dan memahami satu sama lain. Kami memutuskan untuk menjalani sebuah hubungan dengan niat saling menjaga, saling mendukung, dan bertumbuh bersama.</p>
+          </div>
+
+          <div class="story-item scroll-fade" style="--delay: 0.2s">
+            <h3 class="story-item-title">Lamaran</h3>
+            <span class="story-item-date">03 Januari 2026</span>
+            <p class="story-item-desc">
+              Setelah melewati perjalanan yang panjang dan menyelesaikan masa perkuliahan hingga wisuda, kami semakin mantap untuk melangkah ke jenjang yang lebih serius. Dengan restu kedua keluarga, pada 03 Januari 2026, kami melangsungkan
+              acara lamaran sebagai tanda keseriusan untuk membangun masa depan bersama.
+            </p>
+          </div>
+
+          <div class="story-item scroll-fade" style="--delay: 0.3s">
+            <h3 class="story-item-title">Pernikahan</h3>
+            <span class="story-item-date">08 Agustus 2026</span>
+            <p class="story-item-desc">
+              Bukan karena bertemu lalu berjodoh, tetapi karena berjodohlah kami dipertemukan. Dengan penuh rasa syukur kepada Allah SWT, kami akan mengikrarkan janji suci pernikahan pada 08 Agustus 2026. Semoga hari yang penuh berkah ini
+              menjadi awal dari ibadah terpanjang kami.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================
+     SECTION 8 — Gallery Foto
+     ============================================ -->
+      <section class="section gallery">
+        <!-- Background gedung -->
+        <img class="gallery-church" src="./assets/img/gedung.png" />
+
+        <!-- Judul -->
+        <h2 class="gallery-title scroll-fade">Gallery Foto</h2>
+
+        <!-- Grid foto -->
+        <div class="gallery-grid">
+          <div class="gallery-item scroll-fade" style="--delay: 0.1s">
+            <img src="./assets/img/galeri-foto/foto-12.jpeg" alt="Foto 1" />
+          </div>
+
+          <div class="gallery-item scroll-fade" style="--delay: 0.2s">
+            <img src="./assets/img/galeri-foto/foto-11.jpeg" alt="Foto 2" />
+          </div>
+
+          <div class="gallery-item scroll-fade" style="--delay: 0.3s">
+            <img src="./assets/img/galeri-foto/foto-10.jpeg" alt="Foto 3" />
+          </div>
+
+          <div class="gallery-item scroll-fade" style="--delay: 0.4s">
+            <img src="./assets/img/galeri-foto/foto-9.jpeg" alt="Foto 4" />
+          </div>
+          <div class="gallery-item scroll-fade" style="--delay: 0.5s">
+            <img src="./assets/img/galeri-foto/foto-3.jpeg" alt="Foto 5" />
+          </div>
+          <div class="gallery-item scroll-fade" style="--delay: 0.6s">
+            <img src="./assets/img/galeri-foto/foto-2.jpeg" alt="Foto 6" />
+          </div>
+
+          <!-- tambah lebih banyak jika perlu, tinggal copy .gallery-item -->
+        </div>
+
+        <!-- Bunga bawah -->
+        <img class="gallery-flower-bottom scroll-fade" style="--delay: 0.5s" src="./assets/img/bunga-bawah-pink-sec-5.png" />
+      </section>
+
+      <!-- ============================================
+     SECTION 9 — Wedding Gift
+     ============================================ -->
+      <section class="section wedding-gift">
+        <!-- Background gedung -->
+        <img class="gift-church" src="./assets/img/gedung.png" />
+
+        <!-- Judul -->
+        <h2 class="gift-title scroll-fade">Wedding Gift</h2>
+
+        <!-- Deskripsi -->
+        <p class="gift-desc scroll-fade" style="--delay: 0.1s">Bapak/Ibu/Saudara yang ingin mengirimkan hadiah pernikahan dapat melalui virtual account atau e-wallet di bawah ini:</p>
+
+        <!-- Tombol toggle show/hide cards -->
+        <button class="gift-toggle-btn scroll-fade" style="--delay: 0.2s" id="giftToggleBtn" onclick="toggleGiftCards()">Klik Disini</button>
+
+        <!-- Wrapper cards — tersembunyi default -->
+        <div class="gift-cards" id="giftCards">
+          <!-- Card 1 — Cintya Nabila -->
+          <div class="gift-card scroll-fade" style="--delay: 0.1s">
+            <div class="gift-card-top">
+              <div class="gift-chip">
+                <div class="gift-chip-line"></div>
+                <div class="gift-chip-line"></div>
+                <div class="gift-chip-line"></div>
+              </div>
+              <img class="gift-bank-logo" src="./assets/img/wallet/bca-gambar.png" alt="BCA" />
+            </div>
+            <div class="gift-card-bottom">
+              <div class="gift-account-info">
+                <span class="gift-number">7510859337</span>
+                <span class="gift-name">Cintya Nabila</span>
+              </div>
+              <button class="gift-copy-btn" data-number="7510859337" onclick="copyAccount(this)" title="Salin nomor rekening">
+                <!-- Icon copy SVG inline -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Card 2 — Aditya Darmawan -->
+          <div class="gift-card scroll-fade" style="--delay: 0.2s">
+            <div class="gift-card-top">
+              <div class="gift-chip">
+                <div class="gift-chip-line"></div>
+                <div class="gift-chip-line"></div>
+                <div class="gift-chip-line"></div>
+              </div>
+              <img class="gift-bank-logo" src="./assets/img/wallet/bca-gambar.png" alt="BCA" />
+            </div>
+            <div class="gift-card-bottom">
+              <div class="gift-account-info">
+                <span class="gift-number">7391171291</span>
+                <span class="gift-name">Aditya Darmawan</span>
+              </div>
+              <button class="gift-copy-btn" data-number="7391171291" onclick="copyAccount(this)" title="Salin nomor rekening">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- /gift-cards -->
+
+        <!-- Toast notifikasi copy -->
+        <div class="gift-toast" id="giftToast">✓ Nomor disalin!</div>
+
+        <!-- Bunga bawah -->
+        <img class="gift-flower-bottom scroll-fade" style="--delay: 0.3s" src="./assets/img/bunga-bawah-pink-sec-5.png" />
+      </section>
+
+      <!-- ============================================
+     SECTION 10 — Ucapan & RSVP
+     ============================================ -->
+      <section class="section rsvp-section">
+        <!-- Background gedung -->
+        <img class="rsvp-church" src="./assets/img/gedung.png" />
+
+        <!-- Card utama -->
+        <div class="rsvp-card scroll-fade">
+          <!-- Judul -->
+          <h2 class="rsvp-title">Ucapan Sesuatu</h2>
+          <p class="rsvp-desc">Berikan ucapan harapan dan doa kepada kedua mempelai</p>
+
+          <!-- Counter Hadir / Tidak Hadir -->
+          <div class="rsvp-counters">
+            <div class="rsvp-counter-box">
+              <span class="rsvp-counter-label">Hadir</span>
+              <span class="rsvp-counter-num" id="countHadir">0</span>
+            </div>
+            <div class="rsvp-counter-box">
+              <span class="rsvp-counter-label">Tidak Hadir</span>
+              <span class="rsvp-counter-num" id="countTidak">0</span>
+            </div>
+          </div>
+
+          <!-- Form -->
+          <div class="rsvp-form">
+            <input class="rsvp-input" type="text" id="rsvpNama" placeholder="Nama" maxlength="60" />
+
+            <textarea class="rsvp-input rsvp-textarea" id="rsvpUcapan" placeholder="Ucapan" rows="5" maxlength="300"></textarea>
+
+            <select class="rsvp-input rsvp-select" id="rsvpKehadiran">
+              <option value="" disabled selected>Konfirmasi Kehadiran</option>
+              <option value="hadir">Hadir</option>
+              <option value="tidak">Tidak Hadir</option>
+            </select>
+
+            <!-- Pesan error -->
+            <p class="rsvp-error" id="rsvpError"></p>
+
+            <button class="rsvp-btn" id="rsvpSubmitBtn" onclick="submitRSVP()">Kirim</button>
+          </div>
+
+          <!-- Daftar ucapan — scrollable -->
+          <div class="rsvp-list-wrap" id="rsvpListWrap">
+            <div class="rsvp-list" id="rsvpList">
+              <!-- diisi JS -->
+            </div>
+          </div>
+        </div>
+        <!-- /rsvp-card -->
+      </section>
+
+      <!-- ============================================
+     SECTION 11 — Penutup (Adit & Chintya)
+     ============================================ -->
+      <section class="section closing">
+        <!-- Background gedung -->
+        <img class="closing-church" src="./assets/img/gedung.png" />
+
+        <!-- Bunga atas full-width -->
+
+        <!-- Area foto + bingkai -->
+        <div class="closing-frame-area scroll-fade">
+          <!-- Bunga kiri & kanan mengapit frame -->
+          <img class="closing-flower-left" src="./assets/img/sec-galeri/bunga-kanan-section-galeri.png" />
+          <img class="closing-flower-right" src="./assets/img/sec-galeri/bunga-kanan-section-galeri.png" />
+
+          <!-- Bingkai ornamen (dari asset) -->
+          <div class="closing-frame-wrap">
+            <img class="closing-frame-border" src="./assets/img/last/foto-end.png" />
+            <img class="closing-photo" src="./assets/img/foto-sec10.png" />
+          </div>
+        </div>
+
+        <!-- Teks penutup -->
+        <div class="closing-text scroll-fade" style="--delay: 0.15s">
+          <p class="closing-body">merupakan suatu kehormatan dan kebahagian bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu, dan atas kehadiran dan doa restunya, kami ucapkan terima kasih.</p>
+
+          <p class="closing-happy">kami yang berbahagia.</p>
+        </div>
+
+        <!-- Nama pasangan -->
+        <h2 class="closing-names scroll-fade" style="--delay: 0.3s">Bila &amp; Adit</h2>
+
+        <!-- Bunga bawah full-width -->
+        <img class="closing-flower-bottom scroll-fade" style="--delay: 0.4s" src="./assets/img/bunga-bawah-pink-sec-5.png" />
+      </section>
+    </main>
+
+    <!-- Audio player (tersembunyi) -->
+    <audio id="bgMusic" loop preload="auto">
+      <source src="./assets/music/audio/brian-mc-marryDaughter.mp3" type="audio/mpeg" />
+    </audio>
+
+    <!-- Tombol musik — muncul setelah buka undangan -->
+    <button class="music-btn" id="musicBtn" onclick="toggleMusic()" title="Musik">
+      <img class="music-icon" id="musicIcon" src="./assets/music/img/musical-note.png" alt="musik" />
+    </button>
+
+    <script src="./js/script.js"></script>
+  </body>
+</html>

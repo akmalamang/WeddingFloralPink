@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Wedding of Adit & Chintya</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@300;400&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <div class="cover">
+      <!-- Bunga 4 pojok — ganti src sesuai file Anda -->
+      <img class="floral floral--tl" src="./assets/img/bunga-1.png" alt="" />
+      <img class="floral floral--tr" src="./assets/img/bunga-2.png" alt="" />
+      <img class="floral floral--bl" src="./assets/img/bunga-3.png" alt="" />
+      <img class="floral floral--br" src="./assets/img/bunga-4.png" alt="" />
+
+      <!-- Background gedung samar -->
+      <img class="cover__arch-bg" src="./assets/img/gedung-wedding.png" alt="" />
+
+      <!-- Konten -->
+      <div class="cover__content">
+        <div class="photo-wrap fade-item" style="--delay: 0.2s">
+          <img class="photo" src="./assets/img/cover/foto-cover-awal.png" alt="Foto Adit & Chintya" />
+        </div>
+
+        <p class="cover__label fade-item" style="--delay: 0.5s">the wedding of</p>
+        <h1 class="cover__names fade-item" style="--delay: 0.8s">Bila &amp; Adit</h1>
+        <div class="divider fade-item" style="--delay: 1s"></div>
+        <p class="guest-label fade-item" style="--delay: 1.2s">Kepada Yth.</p>
+        <p class="guest-name fade-item" style="--delay: 1.3s" id="guestName">nama tamu</p>
+
+        <button class="btn-open fade-item" style="--delay: 1.5s" onclick="bukaUndangan()">Buka Undangan</button>
+      </div>
+    </div>
+
+    <script src="./js/index.js"></script>
+  </body>
+</html>

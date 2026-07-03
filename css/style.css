@@ -1,0 +1,2386 @@
+/* =============================================
+   Wedding Invitation — Adit & Chintya
+   SATU FILE CSS untuk semua halaman:
+   index.html (cover) + page2.html (undangan)
+   ============================================= */
+
+/* =============================================
+   VARIABEL & RESET
+   ============================================= */
+:root {
+  --bg: #f8ecf0; /* background utama */
+  --text-dark: #3c2c2c;
+  --text-medium: #6b4c50;
+  --text-soft: #9a7880;
+  --name-color: #e8888f; /* warna nama script */
+  --btn-bg: #c98080; /* warna tombol */
+  --btn-text: #ffffff;
+
+  --font-script: 'Great Vibes', cursive;
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Jost', sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  font-family: var(--font-sans);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* =============================================
+   SHARED UTILITIES
+   ============================================= */
+
+/* Garis pembatas tipis */
+.divider {
+  width: 120px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--name-color) 50%, transparent);
+  margin-bottom: 18px;
+}
+
+/* Tombol generik — rounded pill */
+.btn-open,
+.btn-save {
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  font-weight: 400;
+  letter-spacing: 0.07em;
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  transition:
+    filter 0.3s ease,
+    transform 0.2s ease;
+}
+.btn-open:hover,
+.btn-save:hover {
+  filter: brightness(1.08);
+  transform: translateY(-2px);
+}
+.btn-open:active,
+.btn-save:active {
+  transform: translateY(0);
+}
+
+/* =============================================
+   ANIMASI SHARED
+   ============================================= */
+
+/* Fade-up untuk elemen cover (CSS animation langsung) */
+.fade-item {
+  opacity: 0;
+  transform: translateY(18px);
+  animation: fadeUp 0.9s ease forwards;
+  animation-delay: var(--delay, 0s);
+}
+
+/* Fade-up untuk elemen scroll (dipicu JS IntersectionObserver) */
+.scroll-fade {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.75s ease,
+    transform 0.75s ease;
+}
+.scroll-fade.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeDown {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInBg {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes floatButterfly {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-3deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(3deg);
+  }
+}
+
+/* =============================================
+   INDEX.HTML — COVER PAGE
+   ============================================= */
+.cover {
+  position: relative;
+  width: 100%;
+  max-width: 430px;
+  min-height: 100vh;
+  background: var(--bg);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Background gedung cover */
+.cover__arch-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0;
+  animation: fadeInBg 1.8s ease 0.2s forwards;
+}
+
+/* Bunga pojok — file: assets/bunga-tl/tr/bl/br.png */
+.floral {
+  position: absolute;
+  width: 185px;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0;
+  animation: fadeIn 1.2s ease forwards;
+}
+.floral--tl {
+  top: 0;
+  left: 0;
+  animation-delay: 0s;
+}
+.floral--tr {
+  top: 0;
+  right: 0;
+  animation-delay: 0.15s;
+}
+.floral--bl {
+  bottom: 0;
+  left: 0;
+  animation-delay: 0.3s;
+  width: 80px;
+}
+.floral--br {
+  bottom: 0;
+  right: 0;
+  animation-delay: 0.45s;
+}
+
+/* Konten cover */
+.cover__content {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  padding: 80px 32px 60px;
+}
+
+/* Foto pasangan */
+.photo-wrap {
+  width: 260px;
+  height: 310px;
+  border-radius: 130px 130px 0 0;
+  overflow: hidden;
+  margin-bottom: 24px;
+  outline-offset: 4px;
+}
+.photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+/* Teks cover */
+.cover__label {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 17px;
+  color: var(--text-medium);
+  letter-spacing: 0.06em;
+  margin-bottom: 2px;
+}
+.cover__names {
+  font-family: var(--font-script);
+  font-size: clamp(52px, 10vw, 60px);
+  color: var(--name-color);
+  line-height: 1.15;
+  margin-bottom: 14px;
+  text-shadow: 4px 2px 2px var(--btn-text);
+}
+.guest-label {
+  font-size: 11px;
+  font-weight: 300;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+  margin-bottom: 4px;
+}
+.guest-name {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 300;
+  color: var(--text-dark);
+  letter-spacing: 0.04em;
+  min-height: 28px;
+  margin-bottom: 32px;
+}
+
+/* Tombol cover */
+.btn-open {
+  font-size: 15px;
+  padding: 15px 64px;
+  box-shadow: 0 6px 24px rgba(210, 120, 130, 0.35);
+}
+
+/* =============================================
+   PAGE2.HTML — WRAPPER UNDANGAN SCROLL
+   ============================================= */
+.invitation {
+  width: 100%;
+  max-width: 430px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Setiap section minimal 1 layar penuh */
+.section {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background: var(--bg);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* =============================================
+   SECTION 1 — SAVE THE DATE
+   ============================================= */
+.section--savedate {
+  flex-direction: column;
+}
+
+/* Background gedung */
+.savedate__arch-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 95%;
+  pointer-events: none;
+  z-index: 1;
+  animation: fadeInBg 1.8s ease 0.3s forwards;
+}
+
+/* Dekorasi atas — file: assets/dekor-atas.png */
+.deco-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0;
+  transform: translateY(-10px);
+  animation: fadeDown 1s ease 0s forwards;
+}
+
+/* Dekorasi bawah — file: assets/dekor-bawah.png */
+.deco-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeDown 1s ease 0.2s forwards;
+}
+
+/* Kupu-kupu — file: assets/kupu1-4.png */
+.butterfly {
+  position: absolute;
+  pointer-events: none;
+  z-index: 3;
+  opacity: 0;
+}
+.butterfly--1 {
+  top: 22%;
+  left: 4%;
+  width: 60px;
+  animation:
+    fadeIn 1s ease 0.8s forwards,
+    floatButterfly 4s ease-in-out 1.5s infinite;
+}
+.butterfly--2 {
+  top: 38%;
+  right: 4%;
+  width: 55px;
+  animation:
+    fadeIn 1s ease 1s forwards,
+    floatButterfly 5s ease-in-out 2s infinite;
+}
+.butterfly--3 {
+  bottom: 10%;
+  left: 8%;
+  width: 75px;
+  animation:
+    fadeIn 1s ease 1.2s forwards,
+    floatButterfly 4.5s ease-in-out 1.8s infinite;
+}
+.butterfly--4 {
+  bottom: 17%;
+  right: 10%;
+  width: 45px;
+  animation:
+    fadeIn 1s ease 1.4s forwards,
+    floatButterfly 3.8s ease-in-out 2.2s infinite;
+}
+
+/* Konten save the date */
+.savedate__content {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 32px;
+  margin-top: -40px; /* angkat sedikit dari tengah agar tidak tertimpa dekor bawah */
+}
+
+.sd-label {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 18px;
+  color: var(--text-dark);
+  letter-spacing: 0.04em;
+  margin-bottom: 8px;
+}
+.sd-groom {
+  font-family: var(--font-script);
+  font-size: clamp(64px, 18vw, 86px);
+  color: var(--name-color);
+  line-height: 1.05;
+}
+.sd-bride {
+  font-family: var(--font-script);
+  font-size: clamp(56px, 16vw, 76px);
+  color: var(--name-color);
+  line-height: 1.05;
+  margin-bottom: 24px;
+}
+.sd-date {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(22px, 6vw, 30px);
+  color: var(--text-dark);
+  letter-spacing: 0.1em;
+  margin-bottom: 36px;
+}
+
+/* Tombol save the date */
+.btn-save {
+  font-size: 17px;
+  padding: 17px 0;
+  width: 88%;
+  max-width: 320px;
+  box-shadow: 0 6px 24px rgba(180, 100, 110, 0.28);
+}
+
+/* =============================================
+   SECTION BERIKUTNYA — placeholder
+   Akan diisi setelah desain dikirim
+   ============================================= */
+.section--next {
+  min-height: 100vh;
+  background: var(--bg);
+}
+
+/* =============================================
+   RESPONSIVE
+   ============================================= */
+@media (max-width: 380px) {
+  /* Cover */
+  .photo-wrap {
+    width: 220px;
+    height: 264px;
+  }
+  .cover__names {
+    font-size: 48px;
+  }
+  .floral {
+    width: 150px;
+  }
+  .floral.floral--bl {
+    width: 80px;
+  }
+  .btn-open {
+    padding: 13px 48px;
+  }
+
+  /* Save the date */
+  .sd-groom {
+    font-size: 58px;
+  }
+  .sd-bride {
+    font-size: 50px;
+  }
+  .sd-date {
+    font-size: 20px;
+  }
+  .btn-save {
+    font-size: 17px;
+    padding: 14px 30px;
+    width: 100%;
+  }
+  .butterfly--1 {
+    width: 48px;
+  }
+  .butterfly--2 {
+    width: 44px;
+  }
+  .butterfly--3 {
+    width: 60px;
+  }
+  .butterfly--4 {
+    width: 36px;
+  }
+}
+
+@media (min-height: 800px) {
+  .savedate__content {
+    margin-top: -60px;
+  }
+}
+
+/* =============================================
+   SECTION 2 — QS. AR-RUM AYAT 21
+   ============================================= */
+
+.section--s2 {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 80px;
+  margin-top: 2em;
+}
+
+/* Background gedung */
+.s2-arch-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -52%);
+  width: 95%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Dekorasi bunga atas — file: assets/bunga-s2-atas.png */
+.s2-deco-top {
+  position: absolute;
+  top: 0%;
+  transform: translateX(-50%);
+  width: 80%;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0;
+  transform: translateX(-50%) translateY(-10px);
+  animation: fadeDown 1s ease 0.1s forwards;
+}
+
+/* Ornamen gold kanan atas — file: assets/gold-bunga-kanan.png */
+.s2-gold-tr {
+  position: absolute;
+  top: 20%;
+  right: 9%;
+  width: 90px;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0;
+  animation: fadeIn 1s ease 0.5s forwards;
+}
+
+/* Ornamen gold kiri bawah — file: assets/gold-bunga-kiri.png */
+.s2-gold-bl {
+  position: absolute;
+  bottom: 14%;
+  left: 2%;
+  width: 110px;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0;
+  animation: fadeIn 1s ease 0.6s forwards;
+}
+
+/* Bunga pink kecil di dalam frame atas */
+.s2-flower-top {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  pointer-events: none;
+  z-index: 5;
+  opacity: 0;
+  animation: fadeIn 1s ease 0.7s forwards;
+}
+
+/* Kupu kecil kanan bawah dalam frame */
+.s2-butterfly {
+  position: absolute;
+  bottom: 22%;
+  right: 10%;
+  width: 40px;
+  pointer-events: none;
+  z-index: 5;
+  opacity: 0;
+  animation:
+    fadeIn 1s ease 1s forwards,
+    floatButterfly 4s ease-in-out 1.5s infinite;
+}
+
+/* Bunga pojok kiri bawah */
+.s2-corner-bl {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0;
+  animation: fadeIn 1s ease 0.3s forwards;
+}
+
+/* Bunga pojok kanan bawah */
+.s2-corner-br {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 60px;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0;
+  transform: scaleX(-1);
+  animation: fadeIn 1s ease 0.4s forwards;
+}
+
+/* Frame lengkung gold */
+.s2-frame {
+  position: relative;
+  z-index: 4;
+  width: 84%;
+  max-width: 340px;
+  margin-top: 120px; /* beri ruang untuk dekor atas */
+  padding: 60px 28px 36px;
+
+  /* Border frame melengkung gold */
+  border: 1.5px solid #c9a84c;
+  border-radius: 120px 120px 12px 12px; /* lengkung di atas */
+
+  /* Diamond kecil gold di kiri & kanan tengah (pakai pseudo) */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background: transparent;
+}
+
+/* Diamond ornamen kiri & kanan frame */
+.s2-frame::before,
+.s2-frame::after {
+  content: '◆';
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #c9a84c;
+  font-size: 12px;
+  line-height: 1;
+}
+.s2-frame::before {
+  left: -8px;
+}
+.s2-frame::after {
+  right: -8px;
+}
+
+/* Teks ayat */
+.s2-quote {
+  font-family: var(--font-serif);
+  font-style: normal;
+  font-weight: 300;
+  font-size: clamp(13px, 3.8vw, 15.5px);
+  color: var(--text-dark);
+  line-height: 1.85;
+  letter-spacing: 0.01em;
+  margin-bottom: 20px;
+}
+
+/* Sumber ayat */
+.s2-source {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(14px, 4vw, 16px);
+  color: var(--text-dark);
+  letter-spacing: 0.04em;
+}
+
+/* Responsive */
+@media (max-width: 380px) {
+  .s2-frame {
+    width: 88%;
+    padding: 52px 20px 30px;
+    margin-top: 100px;
+  }
+  .s2-gold-tr {
+    width: 70px;
+  }
+  .s2-flower-top {
+    width: 30px;
+  }
+  .s2-gold-bl {
+    width: 88px;
+  }
+  .s2-flower-top {
+    width: 80px;
+  }
+}
+
+/* =============================================
+   SECTION 3 — PROFIL MEMPELAI
+   ============================================= */
+
+.section--s3 {
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-bottom: 60px;
+}
+
+/* Background gedung */
+.s3-arch-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 95%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Dekorasi bunga atas */
+.s3-deco-top {
+  position: absolute;
+  top: 2%;
+  transform: translateX(-50%);
+  width: 100%;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0;
+  animation: fadeDown 1s ease 0.1s forwards;
+}
+
+/* Kupu-kupu kiri bawah */
+.s3-butterfly--1 {
+  position: absolute;
+  bottom: 2%;
+  left: 4%;
+  width: 50px;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0;
+  animation:
+    fadeIn 1s ease 1s forwards,
+    floatButterfly 4s ease-in-out 1.5s infinite;
+}
+
+/* Konten wrapper */
+.s3-content {
+  position: relative;
+  z-index: 4;
+  width: 100%;
+  padding: 0 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-top: 120px; /* ruang untuk dekor atas */
+}
+
+/* Judul script */
+.s3-title {
+  font-family: var(--font-script);
+  font-size: clamp(36px, 10vw, 48px);
+  color: var(--name-color);
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+
+/* Teks undangan */
+.s3-desc {
+  font-family: var(--font-serif);
+  font-size: clamp(13.5px, 3.8vw, 15px);
+  color: var(--text-dark);
+  line-height: 1.8;
+  letter-spacing: 0.01em;
+  margin-bottom: 32px;
+  max-width: 340px;
+}
+
+/* Baris mempelai — wrapper flex */
+.s3-couple-row {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+/* Pria: foto kiri, nama kanan */
+.s3-couple-row--groom {
+  justify-content: flex-start;
+  gap: 16px;
+}
+
+/* Wanita: nama kiri, foto kanan */
+.s3-couple-row--bride {
+  justify-content: flex-end;
+  gap: 16px;
+}
+
+/* Box foto + frame (frame jadi overlay di atas foto) */
+.s3-photo-box {
+  position: relative;
+  width: 170px;
+  height: 210px;
+  flex-shrink: 0;
+}
+
+/* Foto mempelai — di dalam box */
+.s3-photo {
+  position: absolute;
+  inset: 12px; /* jarak dari tepi frame agar foto di dalam frame */
+  width: calc(100% - 24px);
+  height: calc(100% - 24px);
+  object-fit: cover;
+  object-position: center top;
+  border-radius: 4px;
+  z-index: 1;
+}
+
+/* Frame border (asset Anda) — overlay di atas foto */
+.s3-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Nama mempelai */
+.s3-name {
+  font-family: var(--font-script);
+  font-size: clamp(20px, 11vw, 20px);
+  color: var(--name-color);
+  line-height: 1;
+  flex: 1;
+}
+
+.s3-name--right {
+  text-align: left;
+  padding-left: 8px;
+}
+.s3-name--left {
+  text-align: right;
+  padding-right: 10px;
+}
+
+.se-pembungkus {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+}
+
+.se-pembungkus p {
+  font-size: 13px;
+  color: var(--text-medium);
+}
+
+/* Simbol & di tengah */
+.s3-ampersand {
+  font-family: var(--font-script);
+  font-size: clamp(52px, 14vw, 70px);
+  color: var(--name-color);
+  line-height: 1;
+  margin: 4px 0;
+  align-self: center;
+}
+
+/* Responsive */
+@media (max-width: 380px) {
+  .s3-photo-box {
+    width: 145px;
+    height: 180px;
+  }
+  .s3-photo {
+    inset: 10px;
+    width: calc(100% - 20px);
+    height: calc(100% - 20px);
+  }
+  .s3-name {
+    font-size: 20px;
+  }
+  .s3-ampersand {
+    font-size: 48px;
+  }
+  .s3-title {
+    font-size: 32px;
+  }
+}
+
+/* =============================================
+   SECTION 4 — Save the date waktu Mulai acara 
+   ============================================= */
+
+.save-date {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden;
+  background: var(--bg);
+  padding-bottom: 0;
+}
+
+.church {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  z-index: 0;
+}
+
+.flower-top {
+  width: clamp(220px, 60%, 360px);
+  margin-top: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.frame {
+  position: relative;
+  width: clamp(160px, 40vw, 220px);
+  height: clamp(200px, 50vw, 280px);
+  border-radius: 180px 180px 30px 30px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  z-index: 1;
+  align-items: center;
+  margin-top: -10px;
+  opacity: 0;
+  animation: fadeIn 1s ease 0.1s forwards;
+}
+
+.frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.save-date h2 {
+  margin-top: 25px;
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(36px, 8vw, 60px);
+  color: #f09797;
+  position: relative;
+  z-index: 1;
+}
+
+.countdown {
+  margin-top: 30px;
+  display: flex;
+  gap: clamp(10px, 3vw, 20px);
+  position: relative;
+  z-index: 1;
+  /* HAPUS margin-bottom besar — biar flower-bottom atur sendiri */
+}
+
+.box {
+  width: clamp(60px, 15vw, 80px);
+  height: clamp(60px, 15vw, 80px);
+  background: #f59696;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  color: white;
+  opacity: 0;
+  animation: fadeIn 1s ease 0.1s forwards;
+}
+
+.box span {
+  font-size: clamp(16px, 4vw, 22px);
+  font-weight: bold;
+  line-height: 1;
+}
+
+.box small {
+  font-size: clamp(10px, 2.5vw, 14px);
+  margin-top: 2px;
+}
+
+/* Spacer supaya flower-bottom tidak nutup countdown */
+.save-date .spacer {
+  height: clamp(10px, 1vw, 20px);
+}
+
+.flower-bottom {
+  position: relative; /* <-- UBAH dari absolute ke relative */
+  display: block;
+  margin-top: auto;
+  object-fit: cover;
+  width: 100%;
+  opacity: 0;
+  animation: fadeIn 1s ease 0.1s forwards;
+}
+
+/* =============================================
+   SECTION 5 — Akad Nikah
+   ============================================= */
+
+.akad-nikah {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden;
+  background: var(--bg);
+  padding: 0;
+  margin-top: 2em;
+}
+
+/* Background gedung */
+.akad-church {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  z-index: 0;
+}
+
+/* ── Dekorasi pojok ── */
+.akad-flower-topleft {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: clamp(130px, 38vw, 200px);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.akad-flower-topright {
+  position: absolute;
+  top: 10%;
+  right: 5%;
+  width: clamp(90px, 25vw, 140px);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.akad-flower-botleft {
+  position: absolute;
+  bottom: clamp(180px, 18vw, 140px);
+  left: 20px;
+  width: clamp(100px, 28vw, 160px);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.akad-flower-botright {
+  position: absolute;
+  bottom: clamp(180px, 18vw, 140px);
+  right: 20px;
+  width: clamp(70px, 28vw, 30px);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* ── Card Arch ── */
+.akad-card {
+  position: relative;
+  z-index: 0;
+  margin-top: clamp(60px, 14vw, 100px);
+  margin-bottom: 0;
+  width: clamp(280px, 82vw, 420px);
+
+  /* Arch shape: border emas */
+  border: 2px solid #c9a84c;
+  border-radius: 999px 999px 20px 20px; /* ujung atas membulat penuh = arch */
+  padding: clamp(30px, 8vw, 50px) clamp(20px, 6vw, 40px) clamp(30px, 8vw, 50px);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Diamond ornament kiri-kanan (border tengah card) */
+.akad-card::before,
+.akad-card::after {
+  content: '◆';
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #c9a84c;
+  font-size: 14px;
+  line-height: 1;
+}
+.akad-card::before {
+  left: -8px;
+}
+.akad-card::after {
+  right: -8px;
+}
+
+.akad-card-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+/* ── Konten teks ── */
+.akad-title {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(20px, 10vw, 46px);
+  color: #3a3a3a;
+  margin: 0 0 4px;
+  line-height: 1.2;
+}
+
+.akad-date {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(15px, 4vw, 20px);
+  font-weight: 500;
+  color: #3a3a3a;
+  margin: 0;
+}
+
+.akad-time {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(14px, 3.5vw, 18px);
+  color: #3a3a3a;
+  margin: 0;
+}
+
+/* ── Divider dengan icon pin ── */
+.akad-divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 85%;
+  margin: 10px 0 4px;
+}
+
+.akad-line {
+  flex: 1;
+  height: 1.5px;
+  background: #3a3a3a;
+  opacity: 0.4;
+}
+
+.akad-pin {
+  width: clamp(24px, 6vw, 25px);
+  flex-shrink: 0;
+}
+
+/* ── Alamat ── */
+.akad-address {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(12px, 3.2vw, 15px);
+  color: #3a3a3a;
+  line-height: 1.6;
+  margin: 6px 0 16px;
+  font-weight: 600;
+}
+
+.akad-address em {
+  font-style: normal;
+  font-weight: 400;
+}
+
+/* ── Tombol Lokasi ── */
+.akad-btn {
+  position: relative;
+  z-index: 5;
+  display: inline-block;
+  background: #f59696;
+  color: white;
+  text-decoration: none;
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(14px, 3.5vw, 18px);
+  font-weight: 500;
+  padding: clamp(10px, 2.5vw, 14px) clamp(30px, 10vw, 60px);
+  border-radius: 999px;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+  margin-top: 6px;
+  box-shadow: 0 6px 16px rgba(245, 150, 150, 0.35);
+}
+
+.akad-btn:hover {
+  background: #e07878;
+  cursor: pointer;
+  transform: translateY(-2px);
+}
+
+/* ── Bunga bawah ── */
+.akad-flower-bottom {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  display: block;
+  margin-top: clamp(80px, 20vw, 100px);
+  z-index: 1;
+}
+
+/* =============================================
+   SECTION 7 — Lovely Story
+   ============================================= */
+
+.lovely-story {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden;
+  background: var(--bg);
+  padding-bottom: clamp(40px, 10vw, 80px);
+  margin-top: 4em;
+}
+
+/* Background gedung */
+.story-church {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  z-index: 5;
+}
+
+/* ── Dekorasi pojok ── */
+.story-flower-topleft {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: clamp(50px, 24vw, 160px);
+  z-index: 2;
+  pointer-events: none;
+
+  /* fade-in dari kiri */
+  opacity: 0;
+  transform: translateX(-30px);
+  transition:
+    opacity 0.9s ease,
+    transform 0.9s ease;
+}
+.story-flower-topleft.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.story-flower-topright {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: clamp(50px, 20vw, 100px);
+  z-index: 2;
+  pointer-events: none;
+
+  /* fade-in dari kanan */
+  opacity: 0;
+  transform: translateX(30px);
+  transition:
+    opacity 0.9s ease 0.15s,
+    transform 0.9s ease 0.15s;
+}
+.story-flower-topright.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ── Judul ── */
+.story-title {
+  font-family: var(--font-script);
+  font-size: clamp(40px, 10vw, 60px);
+  color: var(--text-dark);
+  margin: clamp(60px, 14vw, 100px) 0 clamp(16px, 4vw, 28px);
+  position: relative;
+  z-index: 3;
+  line-height: 1.2;
+  /* menggunakan .scroll-fade dari global — ditambah di HTML */
+}
+
+/* ── Frame Foto ── */
+.story-frame-wrap {
+  position: relative;
+  z-index: 3;
+  width: clamp(280px, 85vw, 420px);
+  aspect-ratio: 4 / 3;
+  margin-bottom: clamp(24px, 6vw, 40px);
+  /* menggunakan .scroll-fade dari global */
+}
+
+.story-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  z-index: 10;
+}
+
+.story-photo {
+  position: absolute;
+  inset: 6% 6%;
+  width: 88%;
+  height: 88%;
+  object-fit: cover;
+  z-index: 1;
+  border-radius: 4px;
+}
+
+/* ── Timeline ── */
+.story-timeline {
+  position: relative;
+  z-index: 3;
+  width: clamp(280px, 88vw, 460px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(20px, 5vw, 32px);
+}
+
+/* Setiap item pakai .scroll-fade, delay bertingkat via style="--delay" */
+.story-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+
+.story-item-title {
+  font-family: var(--font-sans);
+  font-size: clamp(16px, 4.5vw, 22px);
+  font-weight: 700;
+  color: var(--text-dark);
+  margin: 0 0 4px;
+}
+
+.story-item-date {
+  font-family: var(--font-sans);
+  font-size: clamp(13px, 3.2vw, 16px);
+  color: var(--text-medium);
+  margin-bottom: 8px;
+  display: block;
+}
+
+.story-item-desc {
+  font-family: var(--font-sans);
+  font-size: clamp(12px, 3vw, 15px);
+  color: var(--text-medium);
+  line-height: 1.75;
+  margin: 0;
+}
+
+/* Garis pemisah antar story item — pakai divider global */
+.story-item + .story-item {
+  padding-top: clamp(16px, 4vw, 28px);
+  border-top: 1px solid transparent;
+  background-image: linear-gradient(var(--bg), var(--bg)), linear-gradient(90deg, transparent, var(--name-color) 50%, transparent);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+}
+
+/* =============================================
+   SECTION 8 — Gallery Foto
+   ============================================= */
+
+.gallery {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden;
+  background: var(--bg);
+  padding-bottom: 0;
+}
+
+/* Background gedung */
+.gallery-church {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  z-index: 0;
+  opacity: 0.1;
+}
+
+/* ── Judul ── */
+.gallery-title {
+  font-family: var(--font-script);
+  font-size: clamp(38px, 10vw, 58px);
+  color: var(--text-dark);
+  margin: clamp(40px, 10vw, 70px) 0 clamp(20px, 5vw, 36px);
+  position: relative;
+  z-index: 2;
+  line-height: 1.2;
+}
+
+/* ── Grid Foto ── */
+.gallery-grid {
+  position: relative;
+  z-index: 2;
+  width: clamp(280px, 88vw, 460px);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(14px, 3.5vw, 24px);
+  margin-bottom: clamp(30px, 8vw, 60px);
+}
+
+.gallery-item {
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.1);
+
+  /* Skala sedikit saat hover */
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.gallery-item:hover {
+  transform: scale(1.02);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.15);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+
+  /* Sedikit zoom saat hover via parent */
+  transition: transform 0.5s ease;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.04);
+}
+
+/* ── Bunga bawah ── */
+.gallery-flower-bottom {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  display: block;
+  z-index: 2;
+  padding: 1em;
+}
+
+/* =============================================
+   SECTION 8 — Wedding Gift
+   ============================================= */
+
+.wedding-gift {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden;
+  background: var(--bg);
+  padding-bottom: 0;
+}
+
+/* Background gedung */
+.gift-church {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  z-index: 0;
+}
+
+/* ── Judul ── */
+.gift-title {
+  font-family: var(--font-script);
+  font-size: clamp(38px, 10vw, 58px);
+  color: var(--text-dark);
+  margin: clamp(40px, 10vw, 70px) 0 clamp(12px, 3vw, 20px);
+  position: relative;
+  z-index: 2;
+  line-height: 1.2;
+}
+
+/* ── Deskripsi ── */
+.gift-desc {
+  font-family: var(--font-sans);
+  font-size: clamp(13px, 3.2vw, 16px);
+  color: var(--text-medium);
+  text-align: center;
+  line-height: 1.7;
+  max-width: clamp(260px, 80vw, 400px);
+  position: relative;
+  z-index: 2;
+  margin-bottom: clamp(20px, 5vw, 32px);
+}
+
+/* ── Tombol Toggle ── */
+.gift-toggle-btn {
+  position: relative;
+  z-index: 2;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  font-size: clamp(15px, 3.8vw, 18px);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  padding: clamp(12px, 3vw, 16px) clamp(50px, 14vw, 90px);
+  box-shadow: 0 8px 24px rgba(201, 128, 128, 0.35);
+  transition:
+    filter 0.3s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  margin-bottom: clamp(24px, 6vw, 40px);
+}
+.gift-toggle-btn:hover {
+  filter: brightness(1.08);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(201, 128, 128, 0.45);
+}
+.gift-toggle-btn:active {
+  transform: translateY(0);
+}
+
+/* ── Cards Wrapper ── */
+.gift-cards {
+  position: relative;
+  z-index: 2;
+  width: clamp(280px, 88vw, 460px);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(14px, 4vw, 24px);
+  margin-bottom: clamp(20px, 5vw, 36px);
+
+  /* Hidden by default — animasi slide-down */
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition:
+    max-height 0.55s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.4s ease;
+}
+.gift-cards.open {
+  max-height: 600px; /* cukup besar untuk dua card */
+  opacity: 1;
+}
+
+/* ── Satu Card ── */
+.gift-card {
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 18px;
+  padding: clamp(16px, 4vw, 24px) clamp(18px, 5vw, 28px);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+.gift-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+}
+
+/* Baris atas card: chip + logo bank */
+.gift-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ── Chip ATM (div, tanpa gambar) ── */
+.gift-chip {
+  width: clamp(36px, 9vw, 46px);
+  height: clamp(28px, 7vw, 36px);
+  border-radius: 6px;
+  background: linear-gradient(135deg, #c8a84b 0%, #f0d080 30%, #b8942a 55%, #e8c860 75%, #c8a84b 100%);
+  box-shadow:
+    inset 0 1px 2px rgba(255, 255, 255, 0.5),
+    inset 0 -1px 2px rgba(0, 0, 0, 0.25),
+    0 2px 6px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Garis-garis detail chip */
+.gift-chip-line {
+  width: 100%;
+  height: 2px;
+  border-radius: 1px;
+  background: rgba(0, 0, 0, 0.18);
+}
+
+/* Kilap di pojok kiri atas */
+.gift-chip::before {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 4px;
+  width: 40%;
+  height: 35%;
+  background: rgba(255, 255, 255, 0.35);
+  border-radius: 3px;
+  pointer-events: none;
+}
+
+.gift-bank-logo {
+  height: clamp(20px, 5vw, 28px);
+  object-fit: contain;
+}
+
+/* Garis pemisah dalam card */
+.gift-card::after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #e0c8c8 50%, transparent);
+  margin: -4px 0;
+}
+
+/* Baris bawah card: info rekening + tombol copy */
+.gift-card-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.gift-account-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.gift-number {
+  font-family: var(--font-sans);
+  font-size: clamp(15px, 4vw, 20px);
+  font-weight: 600;
+  color: var(--text-dark);
+  letter-spacing: 0.04em;
+}
+
+.gift-name {
+  font-family: var(--font-sans);
+  font-size: clamp(13px, 3.2vw, 16px);
+  color: var(--text-medium);
+}
+
+/* ── Tombol Copy ── */
+.gift-copy-btn {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: var(--text-soft);
+  padding: 6px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    transform 0.15s ease;
+  flex-shrink: 0;
+}
+.gift-copy-btn:hover {
+  color: var(--name-color);
+  background: rgba(232, 136, 143, 0.1);
+}
+
+/* Animasi ripple saat klik */
+.gift-copy-btn:active {
+  transform: scale(0.82);
+}
+
+/* State: sudah disalin */
+.gift-copy-btn.copied {
+  color: #4caf8a;
+  animation: copyPop 0.4s ease;
+}
+
+@keyframes copyPop {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.3) rotate(-8deg);
+  }
+  70% {
+    transform: scale(0.9) rotate(4deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+/* ── Toast Notifikasi ── */
+.gift-toast {
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: #4caf8a;
+  color: white;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  padding: 10px 24px;
+  border-radius: 999px;
+  box-shadow: 0 6px 20px rgba(76, 175, 138, 0.35);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 999;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+}
+.gift-toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ── Bunga Bawah ── */
+.gift-flower-bottom {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  display: block;
+  z-index: 2;
+}
+
+/* =============================================
+   SECTION 9 — Ucapan & RSVP
+   ============================================= */
+
+.rsvp-section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden;
+  background: var(--bg);
+  padding: clamp(40px, 10vw, 70px) clamp(16px, 5vw, 32px);
+}
+
+/* Background gedung */
+.rsvp-church {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  z-index: 0;
+}
+
+/* ── Card utama ── */
+.rsvp-card {
+  position: relative;
+  z-index: 2;
+  width: clamp(280px, 90vw, 480px);
+  background: rgba(248, 220, 225, 0.75);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  padding: clamp(24px, 7vw, 40px) clamp(20px, 6vw, 36px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(14px, 3.5vw, 20px);
+
+  /* background gedung di dalam card */
+  overflow: hidden;
+}
+
+.rsvp-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('./assets/img/gedung.png') center top / cover no-repeat;
+  opacity: 0.07;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ── Judul ── */
+.rsvp-title {
+  font-family: var(--font-script);
+  font-size: clamp(36px, 9vw, 52px);
+  color: var(--text-dark);
+  line-height: 1.2;
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+/* ── Deskripsi ── */
+.rsvp-desc {
+  font-family: var(--font-sans);
+  font-size: clamp(12px, 3vw, 15px);
+  color: var(--text-medium);
+  text-align: center;
+  line-height: 1.6;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Counter Hadir / Tidak ── */
+.rsvp-counters {
+  display: flex;
+  gap: clamp(12px, 4vw, 24px);
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.rsvp-counter-box {
+  flex: 1;
+  background: #e8908f;
+  border-radius: 18px;
+  padding: clamp(14px, 4vw, 22px) 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 4px 14px rgba(232, 144, 143, 0.35);
+  transition: transform 0.3s ease;
+}
+.rsvp-counter-box:hover {
+  transform: translateY(-2px);
+}
+
+.rsvp-counter-label {
+  font-family: var(--font-sans);
+  font-size: clamp(13px, 3.5vw, 17px);
+  font-weight: 600;
+  color: #fff;
+}
+
+.rsvp-counter-num {
+  font-family: var(--font-sans);
+  font-size: clamp(22px, 6vw, 32px);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* animasi angka berubah */
+.rsvp-counter-num.bump {
+  transform: scale(1.4);
+}
+
+/* ── Form ── */
+.rsvp-form {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(10px, 3vw, 16px);
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.rsvp-input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1.5px solid transparent;
+  border-radius: 14px;
+  padding: clamp(12px, 3.5vw, 16px) clamp(14px, 4vw, 20px);
+  font-family: var(--font-sans);
+  font-size: clamp(13px, 3.2vw, 15px);
+  color: var(--text-dark);
+  outline: none;
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  appearance: none;
+  resize: none;
+}
+
+.rsvp-input::placeholder {
+  color: var(--text-soft);
+}
+
+.rsvp-input:focus {
+  border-color: var(--name-color);
+  box-shadow: 0 0 0 3px rgba(232, 136, 143, 0.18);
+  transform: translateY(-1px);
+}
+
+/* Dropdown arrow custom */
+.rsvp-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239a7880' stroke-width='1.8' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 40px;
+  cursor: pointer;
+}
+
+/* Pesan error */
+.rsvp-error {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: #e05555;
+  min-height: 16px;
+  text-align: center;
+  transition: opacity 0.2s ease;
+}
+
+/* ── Tombol Kirim ── */
+.rsvp-btn {
+  width: 100%;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  font-size: clamp(14px, 3.8vw, 17px);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  padding: clamp(13px, 3.5vw, 17px);
+  box-shadow: 0 6px 20px rgba(201, 128, 128, 0.35);
+  transition:
+    filter 0.25s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+.rsvp-btn:hover {
+  filter: brightness(1.08);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(201, 128, 128, 0.4);
+}
+.rsvp-btn:active {
+  transform: scale(0.97);
+}
+
+/* Ripple effect pada tombol kirim */
+.rsvp-btn .ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  transform: scale(0);
+  animation: rsvpRipple 0.55s linear;
+  pointer-events: none;
+}
+@keyframes rsvpRipple {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/* ── List ucapan ── */
+.rsvp-list-wrap {
+  width: 100%;
+  max-height: 320px; /* batas tinggi sebelum scroll */
+  overflow-y: auto;
+  position: relative;
+  z-index: 1;
+  border-radius: 14px;
+
+  /* Scrollbar custom */
+  scrollbar-width: thin;
+  scrollbar-color: var(--name-color) transparent;
+}
+.rsvp-list-wrap::-webkit-scrollbar {
+  width: 4px;
+}
+.rsvp-list-wrap::-webkit-scrollbar-track {
+  background: transparent;
+}
+.rsvp-list-wrap::-webkit-scrollbar-thumb {
+  background: var(--name-color);
+  border-radius: 4px;
+}
+
+/* Wrapper kosong tidak muncul */
+.rsvp-list-wrap:empty,
+.rsvp-list:empty {
+  display: none;
+}
+
+.rsvp-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 2px 2px 4px;
+}
+
+/* Satu item ucapan */
+.rsvp-item {
+  background: rgba(255, 255, 255, 0.82);
+  border-radius: 14px;
+  padding: clamp(12px, 3.5vw, 16px) clamp(14px, 4vw, 18px);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+
+  /* Animasi masuk */
+  animation: rsvpItemIn 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+@keyframes rsvpItemIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.rsvp-item-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.rsvp-item-name {
+  font-family: var(--font-sans);
+  font-size: clamp(13px, 3.2vw, 15px);
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.rsvp-item-badge {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+.rsvp-item-badge.hadir {
+  background: rgba(76, 175, 138, 0.15);
+  color: #3a9972;
+}
+.rsvp-item-badge.tidak {
+  background: rgba(232, 136, 143, 0.15);
+  color: #c05060;
+}
+
+.rsvp-item-msg {
+  font-family: var(--font-sans);
+  font-size: clamp(12px, 3vw, 14px);
+  color: var(--text-medium);
+  line-height: 1.6;
+  word-break: break-word;
+}
+
+.rsvp-item-time {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  color: var(--text-soft);
+  margin-top: 2px;
+}
+
+/* =============================================
+   SECTION 11 — Penutup
+   ============================================= */
+
+.closing {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden;
+  background: var(--bg);
+  padding: 0 0 0;
+}
+
+/* Background gedung */
+.closing-church {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  z-index: 0;
+  opacity: 0.09;
+}
+
+/* ── Bunga atas ── */
+.closing-flower-top {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  display: block;
+  z-index: 2;
+  /* sedikit overlap ke bawah supaya nyambung dengan frame */
+  margin-bottom: clamp(-30px, -5vw, -16px);
+}
+
+/* ── Area frame + bunga kiri kanan ── */
+.closing-frame-area {
+  position: relative;
+  z-index: 3;
+  width: clamp(280px, 88vw, 480px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* padding atas buat ruang bunga yg overlap dari atas */
+  padding-top: clamp(10px, 3vw, 20px);
+}
+
+/* Bunga kiri mengapit frame */
+.closing-flower-left {
+  position: absolute;
+  left: clamp(-20px, -3vw, -8px);
+  bottom: clamp(-10px, -2vw, 0px);
+  width: clamp(90px, 24vw, 140px);
+  z-index: 4;
+  pointer-events: none;
+
+  /* animasi masuk dari kiri */
+  opacity: 0;
+  transform: translateX(-24px);
+  transition:
+    opacity 0.9s ease 0.2s,
+    transform 0.9s ease 0.2s;
+}
+.closing-flower-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Bunga kanan mengapit frame */
+.closing-flower-right {
+  position: absolute;
+  right: clamp(-20px, -3vw, -8px);
+  bottom: clamp(-10px, -2vw, 0px);
+  width: clamp(90px, 24vw, 140px);
+  z-index: 4;
+  pointer-events: none;
+
+  /* animasi masuk dari kanan */
+  opacity: 0;
+  transform: translateX(24px);
+  transition:
+    opacity 0.9s ease 0.2s,
+    transform 0.9s ease 0.2s;
+}
+.closing-flower-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ── Frame wrap: bingkai + foto ── */
+.closing-frame-wrap {
+  position: relative;
+  width: clamp(240px, 72vw, 380px);
+  /* rasio sedikit portrait sesuai desain */
+  aspect-ratio: 3 / 3.6;
+  z-index: 3;
+}
+
+/* Bingkai ornamen emas dari asset — di atas foto */
+.closing-frame-border {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  z-index: 2;
+}
+
+/* Foto pasangan — di belakang bingkai */
+.closing-photo {
+  position: absolute;
+  /* inset disesuaikan dengan tebal bingkai asset kamu */
+  inset: 5% 5%;
+  width: 90%;
+  height: 90%;
+  object-fit: cover;
+  z-index: 1;
+  border-radius: 4px;
+}
+
+/* ── Teks penutup ── */
+.closing-text {
+  position: relative;
+  z-index: 2;
+  width: clamp(260px, 88vw, 460px);
+  text-align: center;
+  margin-top: clamp(24px, 6vw, 40px);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(16px, 4vw, 28px);
+}
+
+.closing-body {
+  font-family: var(--font-sans);
+  font-size: clamp(13px, 3.4vw, 17px);
+  color: var(--text-dark);
+  line-height: 1.85;
+}
+
+.closing-happy {
+  font-family: var(--font-sans);
+  font-size: clamp(13px, 3.4vw, 17px);
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+
+/* ── Nama pasangan ── */
+.closing-names {
+  position: relative;
+  z-index: 2;
+  font-family: var(--font-script);
+  font-size: clamp(44px, 12vw, 68px);
+  color: var(--text-dark);
+  line-height: 1.2;
+  margin: clamp(16px, 4vw, 28px) 0 clamp(24px, 6vw, 40px);
+  text-align: center;
+}
+
+/* ── Bunga bawah ── */
+.closing-flower-bottom {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  display: block;
+  z-index: 2;
+}
+
+/* =============================================
+   MUSIC BUTTON
+   ============================================= */
+
+.music-btn {
+  /* Posisi — pojok kanan bawah, di atas semua konten */
+  position: fixed;
+  bottom: 28px;
+  right: 22px;
+  z-index: 999;
+
+  /* Tampilan */
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(6px);
+  box-shadow:
+    0 4px 18px rgba(0, 0, 0, 0.15),
+    0 0 0 2px rgba(232, 136, 143, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+
+  /* Tersembunyi saat awal */
+  opacity: 0;
+  transform: scale(0) rotate(-180deg);
+  pointer-events: none;
+
+  /* Transisi muncul */
+  transition:
+    opacity 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+    transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+/* State: muncul */
+.music-btn.visible {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+  pointer-events: auto;
+}
+
+/* Hover */
+.music-btn:hover {
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow:
+    0 6px 24px rgba(0, 0, 0, 0.18),
+    0 0 0 3px rgba(232, 136, 143, 0.4);
+  transform: scale(1.08);
+}
+
+.music-btn:active {
+  transform: scale(0.94);
+}
+
+/* Icon musik */
+.music-icon {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+
+  /* Animasi berputar saat musik play */
+  animation: none;
+  transform-origin: center;
+}
+
+/* Animasi spin saat playing */
+@keyframes musicSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.music-btn.playing .music-icon {
+  animation: musicSpin 4s linear infinite;
+}
+
+/* Animasi pulse ring saat playing */
+.music-btn.playing::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 2px solid rgba(232, 136, 143, 0.5);
+  animation: musicPulse 1.8s ease-out infinite;
+}
+
+.music-btn.playing::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 2px solid rgba(232, 136, 143, 0.3);
+  animation: musicPulse 1.8s ease-out infinite 0.6s;
+}
+
+@keyframes musicPulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.7);
+    opacity: 0;
+  }
+}
+
+/* State: paused — icon diam, ring berhenti */
+.music-btn.paused .music-icon {
+  animation: musicSpin 4s linear infinite paused;
+}
+.music-btn.paused::before,
+.music-btn.paused::after {
+  animation-play-state: paused;
+  opacity: 0.3;
+}
