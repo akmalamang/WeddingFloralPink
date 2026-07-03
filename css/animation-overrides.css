@@ -1,0 +1,307 @@
+/* =============================================
+   ANIMATION OVERRIDES
+   Tambahkan di BAWAH style.css kamu
+   Menghapus semua CSS animation langsung,
+   diganti kontrol via JS IntersectionObserver
+   ============================================= */
+
+/* ── Keyframes yang TETAP dipakai JS ── */
+@keyframes floatButterfly {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-3deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(3deg);
+  }
+}
+
+@keyframes floatFrame {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes boxPulse {
+  0%,
+  100% {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+  50% {
+    box-shadow: 0 10px 28px rgba(245, 150, 150, 0.5);
+  }
+}
+
+@keyframes musicSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes musicPulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.7);
+    opacity: 0;
+  }
+}
+
+@keyframes rsvpRipple {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+@keyframes rsvpItemIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes copyPop {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.3) rotate(-8deg);
+  }
+  70% {
+    transform: scale(0.9) rotate(4deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+/* ── RESET: matikan semua CSS animation lama ── */
+/* Section 1 */
+.savedate__arch-bg,
+.deco-top,
+.deco-bottom,
+.butterfly,
+.butterfly--1,
+.butterfly--2,
+.butterfly--3,
+.butterfly--4,
+/* Section 2 */
+.s2-deco-top,
+.s2-gold-tr,
+.s2-gold-bl,
+.s2-flower-top,
+.s2-butterfly,
+.s2-corner-bl,
+.s2-corner-br,
+.s2-frame,
+/* Section 3 */
+.s3-deco-top,
+.s3-butterfly--1,
+/* Section 4 */
+.church,
+.flower-top,
+.frame,
+.save-date h2,
+.flower-bottom,
+/* Section 5/6 */
+.akad-flower-topleft,
+.akad-flower-topright,
+.akad-flower-botleft,
+.akad-flower-botright,
+.akad-card,
+.akad-flower-bottom {
+  /* State awal: JS yang handle */
+  opacity: 0;
+  animation: none !important;
+  /* Transition untuk saat JS trigger .visible */
+  transition:
+    opacity 0.85s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    transform 0.85s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform, opacity;
+}
+
+/* Background gedung: lebih lambat */
+.savedate__arch-bg,
+.s2-arch-bg,
+.s3-arch-bg,
+.church,
+.akad-church,
+.story-church,
+.gallery-church,
+.gift-church,
+.rsvp-church,
+.closing-church {
+  opacity: 0;
+  animation: none !important;
+  transition: opacity 1.4s ease;
+}
+
+/* scroll-fade global */
+.scroll-fade {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  /* Hormat --delay dari inline style */
+  transition-delay: var(--delay, 0s);
+}
+.scroll-fade.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Story flowers */
+.story-flower-topleft,
+.story-flower-topright {
+  opacity: 0;
+  animation: none !important;
+  transition:
+    opacity 0.9s ease,
+    transform 0.9s ease;
+}
+.story-flower-topleft {
+  transform: translateX(-32px);
+}
+.story-flower-topright {
+  transform: translateX(32px);
+}
+
+/* Closing flowers */
+.closing-flower-left,
+.closing-flower-right {
+  opacity: 0;
+  animation: none !important;
+  transition:
+    opacity 0.9s ease,
+    transform 0.9s ease;
+}
+.closing-flower-left {
+  transform: translateX(-32px);
+}
+.closing-flower-right {
+  transform: translateX(32px);
+}
+
+/* Scale-in elements */
+.frame,
+.akad-card,
+.rsvp-card,
+.s2-frame {
+  opacity: 0;
+  transform: scale(0.88) translateY(16px);
+  transition:
+    opacity 1s cubic-bezier(0.34, 1.56, 0.64, 1),
+    transform 1s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+/* Countdown boxes */
+.box {
+  opacity: 0;
+  transform: translateY(24px) scale(0.9);
+  transition:
+    opacity 0.7s cubic-bezier(0.34, 1.56, 0.64, 1),
+    transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+  /* Hapus animation lama */
+  animation: none !important;
+}
+
+/* Slide dari atas */
+.deco-top,
+.s2-deco-top,
+.s3-deco-top,
+.flower-top {
+  transform: translateY(-32px);
+}
+
+/* Slide dari bawah */
+.deco-bottom,
+.flower-bottom,
+.akad-flower-bottom,
+.gallery-flower-bottom,
+.gift-flower-bottom,
+.closing-flower-bottom {
+  transform: translateY(32px);
+}
+
+/* Slide dari kiri */
+.s2-corner-bl,
+.s2-gold-bl,
+.akad-flower-topleft,
+.akad-flower-botleft {
+  transform: translateX(-32px);
+}
+
+/* Slide dari kanan */
+.s2-corner-br,
+.s2-gold-tr,
+.akad-flower-topright,
+.akad-flower-botright {
+  transform: translateX(32px);
+}
+
+/* Butterflies — fade only, float ditambah JS setelah visible */
+.butterfly,
+.butterfly--1,
+.butterfly--2,
+.butterfly--3,
+.butterfly--4,
+.s2-butterfly,
+.s3-butterfly--1 {
+  opacity: 0;
+  transform: translateY(0);
+  transition: opacity 0.8s ease;
+  animation: none !important;
+}
+
+/* ── Section 1-3: arch-bg centered ── */
+.savedate__arch-bg,
+.s2-arch-bg,
+.s3-arch-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 95%;
+  height: auto;
+  pointer-events: none;
+  z-index: 0;
+  will-change: transform;
+  opacity: 1 !important;
+  transition: none !important;
+  animation: none !important;
+}
+
+/* ── Section 4-11: church full width ── */
+.church,
+.akad-church,
+.story-church,
+.gallery-church,
+.gift-church,
+.rsvp-church,
+.closing-church {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  will-change: transform;
+  opacity: 1 !important;
+  transition: none !important;
+  animation: none !important;
+}
