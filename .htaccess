@@ -1,0 +1,9 @@
+Options -MultiViews
+RewriteEngine On
+
+# Jangan redirect kalau file/folder memang ada
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Semua path yang tidak dikenal → index.html
+RewriteRule ^([^/]+)/?$ /index.html [L,QSA]
