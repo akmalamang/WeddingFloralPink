@@ -821,18 +821,18 @@ body {
 /* Nama mempelai */
 .s3-name {
   font-family: var(--font-script);
-  font-size: clamp(20px, 11vw, 20px);
+  font-size: clamp(16px, 11vw, 16px);
   color: var(--name-color);
   line-height: 1;
   flex: 1;
 }
 
 .s3-name--right {
-  text-align: left;
+  text-align: center;
   padding-left: 8px;
 }
 .s3-name--left {
-  text-align: right;
+  text-align: center;
   padding-right: 10px;
 }
 
@@ -844,7 +844,7 @@ body {
 }
 
 .se-pembungkus p {
-  font-size: 13px;
+  font-size: 10px;
   color: var(--text-medium);
 }
 
@@ -870,7 +870,7 @@ body {
     height: calc(100% - 20px);
   }
   .s3-name {
-    font-size: 18px;
+    font-size: 17px;
     text-align: center;
     text-wrap: nowrap;
   }
