@@ -499,18 +499,48 @@ function showGiftToast() {
    12. RSVP
    ============================================= */
 const RSVP_KEY = 'wedding_rsvp_adit_chintya';
+const API_URL = 'https://script.google.com/macros/s/AKfycbx-6VnF_4n8rcn6LlMGzH9LAZar5hV5nf-o5JUzJYnx1EnhVxqN-rRc_bXUmbFwoVHcxg/exec';
+const ITEMS_PER_PAGE = 3;
+
+let currentPage = 1;
+
+let allRSVP = [];
 
 function initRSVP() {
   if (!document.getElementById('rsvpList')) return;
-  renderRSVPList();
-  updateRSVPCounters();
+  loadRSVP();
 }
 
-function submitRSVP() {
+function showToast(message) {
+  const toast = document.getElementById('toast');
+
+  toast.textContent = message;
+
+  toast.classList.add('show');
+
+  setTimeout(() => {
+    toast.classList.remove('show');
+  }, 3000);
+}
+
+async function submitRSVP() {
   const nama = document.getElementById('rsvpNama').value.trim();
   const ucapan = document.getElementById('rsvpUcapan').value.trim();
   const kehadiran = document.getElementById('rsvpKehadiran').value;
   const errorEl = document.getElementById('rsvpError');
+  const btn = document.getElementById('rsvpSubmitBtn');
+
+  const lastSubmit = localStorage.getItem('last_submit');
+
+  if (lastSubmit) {
+    const diff = Date.now() - Number(lastSubmit);
+
+    if (diff < 30000) {
+      showRSVPError('Mohon tunggu 30 detik sebelum mengirim lagi.');
+
+      return;
+    }
+  }
 
   if (!nama) {
     showRSVPError('Nama tidak boleh kosong.');
@@ -526,20 +556,43 @@ function submitRSVP() {
   }
   errorEl.textContent = '';
 
-  const data = getRSVPData();
-  data.push({
-    nama,
-    ucapan,
-    kehadiran,
-    waktu: new Date().toLocaleString('id-ID', {
-      day: '2-digit',
-      month: 'short',
-      year: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-    }),
-  });
-  localStorage.setItem(RSVP_KEY, JSON.stringify(data));
+  try {
+    btn.disabled = true;
+    btn.classList.add('loading');
+    btn.textContent = 'Mengirim...';
+    const response = await fetch(API_URL, {
+      method: 'POST',
+      body: JSON.stringify({
+        nama,
+        ucapan,
+        kehadiran,
+      }),
+    });
+
+    const result = await response.json();
+
+    if (result.success) {
+      document.getElementById('rsvpNama').value = '';
+      document.getElementById('rsvpUcapan').value = '';
+      document.getElementById('rsvpKehadiran').value = '';
+
+      addRSVPRipple(document.getElementById('rsvpSubmitBtn'));
+      btn.disabled = false;
+      btn.classList.remove('loading');
+      btn.textContent = 'Kirim';
+
+      loadRSVP();
+      showToast('Terima kasih atas doa dan konfirmasi kehadiran Anda ❤️');
+      localStorage.setItem('last_submit', Date.now());
+    }
+  } catch (err) {
+    console.error(err);
+    btn.disabled = false;
+    btn.classList.remove('loading');
+    btn.textContent = 'Kirim';
+
+    showRSVPError('Gagal mengirim RSVP');
+  }
 
   document.getElementById('rsvpNama').value = '';
   document.getElementById('rsvpUcapan').value = '';
@@ -551,6 +604,88 @@ function submitRSVP() {
   document.getElementById('rsvpListWrap')?.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
+async function loadRSVP() {
+  const response = await fetch(API_URL);
+
+  const data = await response.json();
+
+  data.sort((a, b) => new Date(b.waktu) - new Date(a.waktu));
+
+  allRSVP = data;
+
+  renderCurrentPage();
+}
+
+function renderCurrentPage() {
+  const start = (currentPage - 1) * ITEMS_PER_PAGE;
+
+  const end = start + ITEMS_PER_PAGE;
+
+  const pageData = allRSVP.slice(start, end);
+
+  renderRSVPList(pageData);
+
+  updateRSVPCounters(allRSVP);
+
+  renderPagination();
+}
+
+function renderPagination() {
+  const pagination = document.getElementById('rsvpPagination');
+
+  if (!pagination) return;
+
+  const totalPages = Math.ceil(allRSVP.length / ITEMS_PER_PAGE);
+
+  if (totalPages <= 1) {
+    pagination.innerHTML = '';
+
+    return;
+  }
+
+  let html = '';
+
+  html += `
+<button
+class="page-btn"
+${currentPage === 1 ? 'disabled' : ''}
+onclick="changePage(${currentPage - 1})">
+‹
+</button>
+`;
+
+  for (let i = 1; i <= totalPages; i++) {
+    html += `
+<button
+class="page-btn ${i === currentPage ? 'active' : ''}"
+onclick="changePage(${i})">
+${i}
+</button>
+`;
+  }
+
+  html += `
+<button
+class="page-btn"
+${currentPage === totalPages ? 'disabled' : ''}
+onclick="changePage(${currentPage + 1})">
+›
+</button>
+`;
+
+  pagination.innerHTML = html;
+}
+
+function changePage(page) {
+  const totalPages = Math.ceil(allRSVP.length / ITEMS_PER_PAGE);
+
+  if (page < 1 || page > totalPages) return;
+
+  currentPage = page;
+
+  renderCurrentPage();
+}
+
 function getRSVPData() {
   try {
     return JSON.parse(localStorage.getItem(RSVP_KEY)) || [];
@@ -559,12 +694,13 @@ function getRSVPData() {
   }
 }
 
-function renderRSVPList() {
+function renderRSVPList(data) {
   const list = document.getElementById('rsvpList');
   const wrap = document.getElementById('rsvpListWrap');
   if (!list || !wrap) return;
 
-  const data = getRSVPData().slice().reverse();
+  data = data.reverse();
+
   if (!data.length) {
     list.innerHTML = '';
     wrap.style.display = 'none';
@@ -590,8 +726,7 @@ function renderRSVPList() {
     .join('');
 }
 
-function updateRSVPCounters() {
-  const data = getRSVPData();
+function updateRSVPCounters(data) {
   animateCounter('countHadir', data.filter((d) => d.kehadiran === 'hadir').length);
   animateCounter('countTidak', data.filter((d) => d.kehadiran === 'tidak').length);
 }
